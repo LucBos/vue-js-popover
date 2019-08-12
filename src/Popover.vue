@@ -106,16 +106,19 @@
             },
 
             getDropdownPosition (target, dropdown, direction) {
+                // Scroll offset of the current document
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft;
                 let trRect = target.getBoundingClientRect();
+
                 if(this.positionAttr(target, 'sticky')){
                     trRect = {left:0, right:0, top:10, bottom:0, width: trRect.width, height: trRect.height};
+                    scrollTop = 0;
+                    scrollLeft = 0;
                 }
 
                 let ddRect = dropdown.getBoundingClientRect();
 
-                // Scroll offset of the current document
-                let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-                let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft;
 
                 // Position within the parent
                 let offsetLeft = trRect.left + scrollLeft;
